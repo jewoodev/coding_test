@@ -22,3 +22,11 @@
 
  <p>각 테스트 케이스에 대해서, 1의 위치를 공백으로 구분해서 줄 하나에 출력한다. 위치가 낮은 것부터 출력한다.</p>
 
+## 몰랐던 것
+
+#### enumerate
+- enumerate는 반복문 사용 시 몇번째 반복문인지 확인할 때 사용됩니다.
+- 인덱스 번호와 컬렉션의 원소를 tuple 형태로 반환합니다.
+![image](https://user-images.githubusercontent.com/105477856/211295876-cf2fafad-19ac-4d14-b1e1-d62dc31fcd96.png)
+- tuple 형태 반환을 이용해서 아래처럼 활용할 수 있습니다. 
+![image](https://user-images.githubusercontent.com/105477856/211296060-581b1182-2c58-4f01-beaf-464eaa802b12.png)
