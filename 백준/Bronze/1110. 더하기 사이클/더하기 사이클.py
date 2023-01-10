@@ -67,6 +67,6 @@ while 1:
     cnt += 1
     if num == n:
         print(cnt)
-        break                               # str로 풀이하는 법
+        break                                      # str로 풀이하는 법
 '''
 
