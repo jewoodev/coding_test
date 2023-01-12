@@ -14,13 +14,13 @@ print(max_people)
 '''
 다른 풀이
 import sys
-input =  sys.stdin.readline  # 사용 접근법이 참 좋다고 느껴진다. 응용하면 좋을 것 같다. 
+input =  sys.stdin.readline            # 사용 접근법이 참 좋다고 느껴진다. 응용하면 좋을 것 같다. 
 
-result = 0                   # 최댓값
-num = 0                      # 사람들의 일시적인 값
+result = 0                             # 최댓값
+num = 0                                # 사람들의 일시적인 값
 
 for i in range(10):
-    a, b = map(int, input().split()) # 내린 사람, 탄 사람
+    a, b = map(int, input().split())   # 내린 사람, 탄 사람
     num -= a
     num += b
     result = max(result, num)
