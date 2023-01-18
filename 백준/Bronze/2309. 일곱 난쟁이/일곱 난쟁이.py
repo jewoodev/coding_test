@@ -63,7 +63,7 @@ for i in range(len(array)):
 # 다른 풀이 - combinations library
 import itertools
 
-array = [int(input()) for _ in range(9)]
+array = [int(input()) for _ in range(9)]    # list comprehension 이용을 이렇게 하는 걸 생각해보지 못했다. 
 
 for i in itertools.combinations(array, 7):  # 해당 배열을 7명 중복없이 뽑아준다.
     if sum(i) == 100:  # 그합이 100이라면
