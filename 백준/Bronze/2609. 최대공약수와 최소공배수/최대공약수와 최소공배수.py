@@ -10,3 +10,5 @@ def lcm(a, b):
 
 print(gcd(a, b))
 print(lcm(a, b))
+
+#
