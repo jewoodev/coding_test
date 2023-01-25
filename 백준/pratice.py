@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # import sys
 # input = sys.stdin.readline
 
@@ -19,3 +20,13 @@ for j in coin_list:
         break
 
 print(cost_coin)         # 이래도 안된다. 놓친게 있는듯
+=======
+"""
+n = int(input())
+cnt = 0
+
+while n > 3:
+    if n % 5 != 0 & n % 3 != 0:
+        if (n%10) % 3 == 0:
+"""
+>>>>>>> 891a36352469225c1d3d4455f0cf76f898b11ecd

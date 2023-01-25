@@ -1,62 +1,3 @@
-"""
-import sys
-input = sys.stdin.readline
-
-
-N, K = map(int, input().split())
-coin_list = []
-rmdr = K
-cost_coin = 0
-
-for i in range(N):
-    coin_list.append(int(input()))
-
-while 1:
-    for i in range(len(coin_list)):
-        if rmdr < coin_list[i]:
-            cost_coin += rmdr // coin_list[i-1]
-            rmdr = rmdr % coin_list[i-1]
-            break
-    if rmdr == 0:                          # 이 조건을 따지는 순서가 나중이라 시간 초과가 걸리는 것인가 싶어 while 조건문 바로 아래로 옮겼지만 고쳐지지 않았다.
-        break
-
-print(cost_coin)
-"""
-
-"""
-import sys
-input = sys.stdin.readline
-
-
-N, K = map(int, input().split())
-coin_list = []
-rmdr = K
-cost_coin = 0
-
-for i in range(N):
-    coin_list.append(int(input()))
-
-
-for i in range(len(coin_list)):
-    for i in range(len(coin_list)):
-        if rmdr < coin_list[i]:
-            cost_coin += rmdr // coin_list[i-1]
-            rmdr = rmdr % coin_list[i-1]
-            break
-    if rmdr == 0:
-        break
-
-
-print(cost_coin)       # 이래도 뜬다.
-"""
-
-"""
-### 다른 풀이를 보았다. ###
-
-import sys
-input = sys.stdin.readline
-
-
 N, K = map(int, input().split())
 coin_list = []
 cost_coin = 0
@@ -66,35 +7,14 @@ for i in range(N):
 
 coin_list.reverse()
 
-for i in coin_list:
-    if K - i > 0:
-        cost_coin += K // i
-        K = K % i         # 와 이래도 안되네;;
-
-print(cost_coin)
-"""
-
-"""
-import sys
-input = sys.stdin.readline
-
-
-N, K = map(int, input().split())
-coin_list = []
-cost_coin = 0
-
-for i in range(N):
-    coin_list.append(int(input()))
-
-coin_list.reverse()
-
-for i in coin_list:
+for j in coin_list:
+    if K - j >= 0:
+        cost_coin += K // j
+        K = K % j
     if K == 0:
         break
-    elif K - i > 0:
-        cost_coin += K // i
-        K = K % i
 
+<<<<<<< HEAD
 print(cost_coin)         # 이래도 안된다. 놓친게 있는듯
 """
 
@@ -137,3 +57,6 @@ for j in coin_list:
 
 print(cost_coin)         # 이래도 안된다. 놓친게 있는듯
 """
+=======
+print(cost_coin)
+>>>>>>> 891a36352469225c1d3d4455f0cf76f898b11ecd
