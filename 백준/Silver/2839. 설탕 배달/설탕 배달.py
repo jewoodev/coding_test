@@ -1,16 +1,17 @@
 """
+# 내 풀이
 n = int(input())
 cnt = 0
 
 while n > 3:
     if n % 5 != 0 & n % 3 != 0:
-        if (n%10) % 3 == 0:
+        if (n%10) % 3 == 0:   # 처음엔 5로 나뉘면 5로 나누기 시작해서 3으로 나누는 방식이었는데 32, 16 등 반례가 많이 생기는 방식인 것을 알고 고쳐보려다 풀지 못했다.
 """
-
+# 다른 풀이
 sugar = int(input())
 
 bag = 0
-while sugar >= 0 :
+while sugar >= 0 :                      
     if sugar % 5 == 0 :  # 5의 배수이면
         bag += (sugar // 5)  # 5로 나눈 몫을 구해야 정수가 됨
         print(bag)
