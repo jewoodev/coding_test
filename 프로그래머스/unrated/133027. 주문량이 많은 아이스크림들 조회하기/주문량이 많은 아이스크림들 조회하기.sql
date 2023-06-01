@@ -23,3 +23,8 @@ LIMIT 3;
 #         order by t_o desc
 #      ) as temp
 # limit 3;
+
+# select *
+# from first_half as fh
+# inner join july as j
+# on fh.flavor = j.flavor;
