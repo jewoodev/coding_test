@@ -1,67 +1,27 @@
--- 코드를 입력하세요
-# WITH cte AS (
-#     SELECT MP.MEMBER_NAME, RR.REVIEW_TEXT, RR.REVIEW_DATE, COUNT(RR.REVIEW_ID) arn
-#     FROM MEMBER_PROFILE MP
-#     JOIN REST_REVIEW RR ON MP.MEMBER_ID = RR.MEMBER_ID
-#     GROUP BY MP.MEMBER_ID
-#     ORDER BY arn desc
-#     LIMIT 1
-# )
-# SELECT MEMBER_NAME, cte.REVIEW_TEXT, cte.REVIEW_DATE
-# FROM cte
-# ORDER BY REVIEW_DATE, REVIEW_TEXT;
+SELECT m.member_name, r.review_text, date_format(r.review_date, "%Y-%m-%d")
+FROM member_profile m
+-- 프로필과 리뷰 정보 다 필요해서 join
+INNER JOIN (
+    SELECT *
+    FROM rest_review 
 
-# SELECT MP.MEMBER_NAME, RR.REVIEW_TEXT, RR.REVIEW_DATE, COUNT(RR.REVIEW_ID)
-# FROM MEMBER_PROFILE MP
-# JOIN REST_REVIEW RR
-# GROUP BY MP.MEMBER_ID
-# ORDER BY REVIEW_DATE, REVIEW_TEXT;
+    -- 가장 많은 리뷰 수를 가지고 있는 멤버들만 뽑음
+    WHERE member_id in (
+        SELECT member_id 
+        FROM rest_review
+        GROUP BY member_id
 
-# SELECT *
-# FROM MEMBER_PROFILE MP
-# JOIN REST_REVIEW RR ON MP.MEMBER_ID = RR.MEMBER_ID
-# ORDER BY MP.MEMBER_NAME;
+        -- 멤버 아이디 별로 그룹지었을 때, 그 리뷰 개수가 최대인 멤버만 뽑기
+        HAVING count(*) = (
 
-# SELECT MP.MEMBER_NAME, RR.REVIEW_TEXT, RR.REVIEW_DATE, COUNT(RR.REVIEW_ID) arn
-# FROM MEMBER_PROFILE MP
-# JOIN REST_REVIEW RR ON MP.MEMBER_ID = RR.MEMBER_ID
-# GROUP BY MP.MEMBER_ID
-# ORDER BY arn desc;
-
--- ...
-SELECT M.MEMBER_NAME, R.REVIEW_TEXT, DATE_FORMAT(R.REVIEW_DATE, "%Y-%m-%d")
-FROM MEMBER_PROFILE M
-JOIN (
-    SELECT REVIEW_TEXT, REVIEW_DATE, MEMBER_ID
-    FROM REST_REVIEW
-    WHERE MEMBER_ID = (
-        SELECT MEMBER_ID
-        FROM REST_REVIEW
-        GROUP BY MEMBER_ID
-        ORDER BY COUNT(*) DESC
-        LIMIT 1)
-    ) R
-ON R.MEMBER_ID = M.MEMBER_ID
-ORDER BY R.REVIEW_DATE, R.REVIEW_TEXT
-;
-
-# with sum_review as (
-#     select 
-#         member_id,
-#         sum(review_score) as review_score
-#     from rest_review
-#     group by member_id, review_date
-# ), reviewer_ids as (
-#     select member_id
-#     from sum_review
-#     where review_score = (select max(review_score) from sum_review)
-# )
-# select
-#     mem.member_name,
-#     rv.review_text,
-#     date_format(rv.review_date, '%Y-%m-%d')
-# from member_profile mem
-# inner join rest_review rv
-# on mem.member_id = rv.member_id
-# where mem.member_id in (select member_id from reviewer_ids)
-# order by rv.review_date, rv.review_text;
+            -- 가장 많은 리뷰가 몇 개인지 뽑기
+            SELECT count(*)
+            FROM rest_review
+            GROUP BY member_id
+            ORDER BY count(*) desc
+            LIMIT 1
+        )
+    )
+) r
+ON m.member_id = r.member_id
+ORDER BY r.review_date, r.review_text
