@@ -22,6 +22,8 @@ def solution():
         fourth_coin_count += input_money // 10
         input_money = input_money - 10 * (input_money // 10)
 
+
+
     return first_coin_count+twice_coin_count+third_coin_count+fourth_coin_count
 
 if __name__ == "__main__":
