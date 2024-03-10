@@ -1,80 +1,60 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayDeque;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Main {
-	static int N, M;
-	static ArrayList <Integer>[] arr;
-	static boolean isVisited[];
-	static int max;
-	static int cntArr[];
-	
-	static void DFS(int start) {
-		isVisited[start] = true;
-		for (int i : arr[start]) {
-			if (isVisited[i]) continue;
-			cntArr[i]++; // i가 해킹할 수 있는 숫자 증가
-			DFS(i);
-		}
-	}
-	
-	static void BFS(int start) {
-		Queue <Integer> que = new ArrayDeque<Integer>();
-		
-		que.add(start);
-		isVisited[start] = true;
-		
-		while(!que.isEmpty()) {
-			int now = que.poll();
-			for (int i : arr[now]) {
-				if (isVisited[i]) continue;
-				cntArr[i]++; // i가 해킹할 수 있는 숫자 증가
-				isVisited[i] = true;
-				que.add(i);
-			}
-		}
-	}
-	
+public class Main { /* P265 문제 47, 백준 1325번. 효율적으로 해킹하기 */
+    private static int n, m;
+    private static boolean[] visited;
+    private static int[] answer;
+    private static ArrayList<Integer>[] a;
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(bf.readLine());
-		
-		N = Integer.parseInt(st.nextToken());
-		M = Integer.parseInt(st.nextToken());
-		
-		isVisited = new boolean[N+1];
-		cntArr = new int[N+1];
-		
-		// 신뢰 관계 입력
-		arr = new ArrayList[N+1];
-		for (int i=0; i<N+1; i++) arr[i] = new ArrayList <Integer>();
-		for (int i=0; i<M; i++) {
-			st = new StringTokenizer(bf.readLine());
-			int a = Integer.parseInt(st.nextToken());
-			int b = Integer.parseInt(st.nextToken());
-			arr[a].add(b); // a가 b를 신뢰, a는 b에게 해킹 당할 수 있음
-		}
-		
-		// 1번부터 N번까지 search
-		for (int i=1; i<N+1; i++) {
-			isVisited = new boolean[N+1];
-			//DFS(i); // 메모리↓ 시간↑
-			BFS(i); // 메모리↑ 시간↓
-			
-		}
-		
-		// 해킹할 수 있는 최댓값 찾기
-		for (int i=1; i<N+1; i++) {
-			if (max<cntArr[i]) max = cntArr[i];
-		}
-		
-		// 최댓값인 컴퓨터 출력
-		for (int i=1; i<N+1; i++) if (max == cntArr[i]) System.out.print(i+" ");
-	}
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken()); //컴퓨터 개수
+        int m = Integer.parseInt(st.nextToken()); //신뢰 관계 개수
+        a = new ArrayList[n + 1];
+        answer = new int[n + 1];
+        for (int i = 1; i < n + 1; i++) {
+            a[i] = new ArrayList<>();
+        }
+        for (int i = 0; i < m; i++) {
+            st = new StringTokenizer(br.readLine());
+            int s = Integer.parseInt(st.nextToken());
+            int e = Integer.parseInt(st.nextToken());
+            a[s].add(e);
+        }
+        for (int i = 1; i < n + 1; i++) {
+            visited = new boolean[n + 1];
+            bfs(i);
+        }
+        int maxVal = 0;
+        for (int i = 1; i < n + 1; i++) {
+            if (maxVal < answer[i]) maxVal = answer[i];
+        }
+        for (int i = 1; i < n + 1; i++) {
+            if (answer[i] == maxVal) bw.write(i + " ");
+        }
+        bw.close();
+        br.close();
+    }
 
+    private static void bfs(int index) {
+        Queue<Integer> q = new LinkedList<>();
+        q.add(index);
+        visited[index] = true;
+        while (!q.isEmpty()) {
+            int nowNode = q.poll();
+            for (Integer i : a[nowNode]) {
+                if (visited[i] == false) {
+                    visited[i] = true;
+                    answer[i]++;
+                    q.add(i);
+                }
+            }
+        }
+    }
 }
