@@ -24,7 +24,7 @@ class Solution {
         double d2 = (w*2.0)/3.0;
         double d3 = (w*1.0)/2.0;
         double d4 = (w*3.0)/4.0;
-        //그 비율의 몸무게를 갖는 사람이 있다면, 그 사람 수만큼 횟수를 세어준다.
+        //그 비율의 몸무게를 갖는 사람이 있다면, 그 사람 수만큼 경우의 수를 늘려준다.
         if(map.containsKey(d1)) answer += map.get(d1);
         if(map.containsKey(d2)) answer += map.get(d2);
         if(map.containsKey(d3)) answer += map.get(d3);
