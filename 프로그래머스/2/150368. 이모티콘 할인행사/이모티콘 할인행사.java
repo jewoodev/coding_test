@@ -2,8 +2,6 @@ class Solution {
     private static int goal1 = 0; //목표1
     private static int goal2 = 0; //목표2
 
-    private static int[] arr; 
-
     public static int[] solution(int[][] users, int[] emoticons) {
         int[] answer = new int[2];
 
