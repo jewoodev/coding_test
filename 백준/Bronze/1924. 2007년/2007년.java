@@ -6,9 +6,9 @@ class Main {
         int x = sc.nextInt();
         int y = sc.nextInt();
         String[] dow = {"MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"};
-        int[] months = {0,31,28,31,30,31,30,31,31,30,31,30,31};
+        int[] months = {31,28,31,30,31,30,31,31,30,31,30,31};
         int day = 0;
-        for (int i = 0; i < x; i++) {
+        for (int i = 0; i < x - 1; i++) {
             day += months[i];
         }
         day += y - 1;
