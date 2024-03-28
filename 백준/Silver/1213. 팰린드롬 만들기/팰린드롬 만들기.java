@@ -13,7 +13,7 @@ class Main {
         for (int i = 0; i < alpha.length; i++)
             if (alpha[i] % 2 != 0) odd++;
 
-        String answer = "";
+        StringBuilder answer = new StringBuilder();
         StringBuilder sb = new StringBuilder();
         if (odd > 1) {
             System.out.print("I'm Sorry Hansoo");
@@ -25,14 +25,14 @@ class Main {
                     sb.append((char) (i+65));
                 }
             }
-            answer += sb.toString();
+            answer.append(sb.toString());
             String end = sb.reverse().toString();
             sb = new StringBuilder();
             for (int i = 0; i < alpha.length; i++) {
                 if (alpha[i] % 2 == 1)
                     sb.append((char) (i+65));
             }
-            answer += sb.toString() + end;
+            answer.append(sb.append(end));
         }
         System.out.print(answer);
     }
