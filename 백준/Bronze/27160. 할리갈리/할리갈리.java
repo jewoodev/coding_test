@@ -11,9 +11,7 @@ class Main {
             st = new StringTokenizer(br.readLine());
             String fruit = st.nextToken();
             int nCnt = Integer.parseInt(st.nextToken());
-            int pCnt = 0;
-            if (map.containsKey(fruit)) pCnt = map.get(fruit);
-            map.put(fruit, pCnt + nCnt);
+            map.put(fruit, map.getOrDefault(fruit, 0) + nCnt);
         }
         if (map.containsValue(5)) System.out.print("YES");
         else System.out.print("NO");
