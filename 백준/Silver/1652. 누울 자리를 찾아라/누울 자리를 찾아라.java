@@ -31,6 +31,8 @@ class Main {
                 }
             }
         }
-        System.out.print(horizon + " " + vertical);
+        bw.write(horizon + " " + vertical);
+        bw.close();
+        br.close();
     }
 }
