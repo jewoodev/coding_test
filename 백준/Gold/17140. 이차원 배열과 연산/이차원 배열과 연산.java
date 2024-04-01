@@ -110,7 +110,7 @@ class Main {
             maxSize = Math.max(maxSize, k);
         }
         if (maxSize > 100) maxSize = 100;
-        // 연산 후에 가장 큰 행을 기준으로 크기를 변경
+        // 연산 후에 가장 큰 열을 기준으로 크기를 변경
         A = new int[maxSize][A[0].length];
         for (int i = 0; i < maxSize; i++) {
             System.arraycopy(tmp[i], 0, A[i], 0, A[0].length);
