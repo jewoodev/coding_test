@@ -1,16 +1,14 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-
     public static int[][] arr = new int[19][19];
     public static boolean[][] visited = new boolean[19][19];
     public static int[] dR = {-1, 0, 1, 1, 1, 0, -1, -1};
     public static int[] dC = {1, 1, 1, 0, -1, -1, -1, 0};
     public static int winner = 0;
     public static boolean over = false; // 5목을 넘어서는지 여부
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         for (int i = 0; i < 19; i++) {
@@ -27,11 +25,11 @@ public class Main {
                         DFS(new Node(row, col, arr[row][col]), 1, dir);
                         if (!over) { // 5목을 넘어서지 않은 경우
                             // 반대방향에서도 넘어서지 않는지 확인
-                            int nr = row + dR[dir + 4];
-                            int nc = col + dC[dir + 4];
+                            int nR = row + dR[dir + 4];
+                            int nC = col + dC[dir + 4];
                             int color = arr[row][col];
-                            if (nr >= 0 && nr < 19 && nc >= 0 && nc < 19) {
-                                if (arr[nr][nc] == color) {
+                            if (nR >= 0 && nR < 19 && nC >= 0 && nC < 19) {
+                                if (arr[nR][nC] == color) {
                                     winner = 0;
                                 }
                             }
