@@ -1,10 +1,5 @@
-import java.io.BufferedReader;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 /*
 입력값 정수 N 이 주어지고 N개의 숫자가 주어지는데, 각각이 풍선이며 순서대로 1번 ~ N번 풍선이라는 설정이다.
