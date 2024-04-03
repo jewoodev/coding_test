@@ -1,5 +1,10 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.StringTokenizer;
 
 /*
 입력값 정수 N 이 주어지고 N개의 숫자가 주어지는데, 각각이 풍선이며 순서대로 1번 ~ N번 풍선이라는 설정이다.
@@ -16,55 +21,63 @@ import java.util.*;
 2. 2(2) 1(3) -3(4) -1(5) -> 이제 4번 풍선을 터트려야 하는데 터트리기 전의 list에서 -3을 이동해야 한다. 그래서 5번 풍선이 된다.
 3. 2(2) 1(3) -1(5)
 4. 2(2) 1(3)
-5.
+---------------------
+Deque를 쓰면 된다는 걸 구글링으로 찾고 이해해보니 Deque를 써야 되는 문제였다.
+양쪽에서 offer() 과 poll() 이 가능하므로 이동과 삭제 로직을 구현하는데 복잡성이 많이 줄어든다.
 */
 
 class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
+        int N = Integer.parseInt(br.readLine());
 
-        Deque<int[]> q = new ArrayDeque<>();
+        Deque<Balloon> dq = new ArrayDeque<>();
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int[] arr = new int[n];
-        for(int i=0; i<n; i++) {
+        int[] arr = new int[N];
+        for (int i = 0; i < N; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
         StringBuilder sb = new StringBuilder();
         sb.append("1 ");
-        int in = arr[0];
+        int val = arr[0];
 
-        for(int i=1; i<n; i++){
-            q.add(new int[] {(i+1), arr[i]}); // {풍선 idx, 내용}
+        for (int i = 1; i < N; i++){
+            dq.offer(new Balloon(i + 1, arr[i])); // {풍선 idx, 내용}
         }
 
-        while(!q.isEmpty()) {
+        while (!dq.isEmpty()) {
             // 양수인 경우
-            if(in > 0) {
+            if(val > 0) {
                 // 순서 뒤로 돌리기
-                for(int i=1; i<in; i++) {
-                    q.add(q.poll());
+                for (int i = 1 ; i < val; i++) {
+                    dq.offer(dq.poll());
                 }
-
-                int[] nxt = q.poll();
-                in = nxt[1];
-                sb.append(nxt[0]+" ");
+                Balloon next = dq.poll();
+                val = next.val;
+                sb.append(next.num).append(" ");
             }
             // 음수인 경우
             else {
-                for(int i=1; i < - in; i++	) {
-                    q.addFirst(q.pollLast());
+                int rIn = - val;
+                for (int i = 1; i < rIn; i++) {
+                    dq.addFirst(dq.pollLast());
                 }
-
-                int[] nxt = q.pollLast();
-                in = nxt[1];
-                sb.append(nxt[0]+" ");
+                Balloon next = dq.pollLast();
+                val = next.val;
+                sb.append(next.num).append(" ");
             }
         }
+        System.out.println(sb);
+    }
 
-        System.out.println(sb.toString());
-
+    private static class Balloon {
+        int num; // 풍선 번호
+        int val; // 안의 숫자
+        private Balloon(int num, int val) {
+            this.num = num;
+            this.val = val;
+        }
     }
 }
