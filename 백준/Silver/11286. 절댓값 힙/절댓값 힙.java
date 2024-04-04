@@ -1,9 +1,15 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.PriorityQueue;
+import java.io.*;
+import java.util.*;
 
-public class Main implements Comparable<Main> { //P94/문제14.절댓값힙구현하기
+/*
+# 요구사항 정리 #
+1. N번 만큼 정수가 입력된다. 입력값이 0이 아니라면 배열에 추가하고 0이라면 배열의 가장 작은 값을 출력하고 제거하라.
+
+# 풀이 논리 #
+1. 요구사항 1번을 구현하기 위해 우선순위 큐를 사용한다.
+*/
+
+public class Main implements Comparable<Main> {
     int val;
 
     public Main(int val) {
