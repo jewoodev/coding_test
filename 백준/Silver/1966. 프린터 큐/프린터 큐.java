@@ -18,7 +18,7 @@ class Main {
         int T = Integer.parseInt(br.readLine()); // 테스트 케이스 갯수
         StringBuilder sb = new StringBuilder();
 
-        // 각 테스트 케이스를 리스트에 저장
+        // 각 테스트 케이스를 저장하는 로직 시작
         for (int i = 0; i < T; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             int N = Integer.parseInt(st.nextToken()); // 문서의 개수
