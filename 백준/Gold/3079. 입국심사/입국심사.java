@@ -53,7 +53,7 @@ class Main {
             // 풀이 논리 1번 로직
             if (totalPeople >= M) {
                 high = mid - 1;
-                answer = Math.min(answer, mid);
+                answer = mid;
             } else low = mid + 1;
         }
         System.out.print(answer);
