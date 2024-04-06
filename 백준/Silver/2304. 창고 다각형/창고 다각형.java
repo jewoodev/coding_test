@@ -47,7 +47,7 @@ class Main {
         }
         stack.clear();
 
-        //오른쪽 비교
+        //오른쪽에서 왼쪽으로 탐색
         loop = arr[end];
         for (int i = end - 1; i >= start; i--) {
             if (arr[i] < loop) stack.push(i);
