@@ -1,9 +1,5 @@
-import java.io.BufferedReader;
-    import java.io.IOException;
-    import java.io.InputStreamReader;
-    import java.util.LinkedList;
-    import java.util.Queue;
-    import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 /*
 # 요구사항 정리 #
@@ -36,7 +32,7 @@ class Main {
             eR = Integer.parseInt(st.nextToken()); // 도착 위치의 행
             eC = Integer.parseInt(st.nextToken()); // 도착 위치의 열
             BFS(sR, sC);
-            sb.append(moveArr[eR][eC]).append("\n");
+            sb.append(moveArr[eR][eC]).append(""\n"");
         }
         System.out.println(sb);
     }
