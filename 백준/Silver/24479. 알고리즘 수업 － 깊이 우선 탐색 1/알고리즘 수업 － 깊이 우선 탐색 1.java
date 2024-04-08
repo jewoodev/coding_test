@@ -27,14 +27,14 @@ class Main {
         for (int i = 1; i < nodeCnt + 1; i++) {
             listArr[i] = new ArrayList<>();
         }
-        // 방문 정보
+        // 방문 순서 정보를 저장할 배열
         check = new int[nodeCnt + 1];
-        // 맵 정보 저장
+        // 그래프 정보 저장
         for (int i = 0; i < edgeCnt; i++) {
             st = new StringTokenizer(br.readLine());
             int start = Integer.parseInt(st.nextToken());
             int end = Integer.parseInt(st.nextToken());
-            listArr[start].add(end);
+            listArr[start].add(end); // 무방향 그래프 구현
             listArr[end].add(start);
         }
         // 인접 정점을 오름차순으로 방문하기 위해 정렬
@@ -42,7 +42,7 @@ class Main {
             Collections.sort(listArr[i]);
         }
 
-        visitOrder = 1;
+        visitOrder = 1; // 방문 순서
         // DFS
         DFS(startNode);
 
@@ -54,12 +54,13 @@ class Main {
     }
 
     private static void DFS(int node) {
-        check[node] = visitOrder;
-        for (int i = 0; i < listArr[node].size(); i++) {
-            int newNode = listArr[node].get(i);
-            if (check[newNode] == 0) {
-                visitOrder++;
-                DFS(newNode);
+        check[node] = visitOrder; // 방문 순서를 저장
+        // 1.탐색 로직 시작
+        for (int i = 0; i < listArr[node].size(); i++) { // 1-1. 해당 노드에서 
+            int newNode = listArr[node].get(i); // 1-2. 방문 가능한 노드가
+            if (check[newNode] == 0) { // 1-3. 방문했던 게 아니라면
+                visitOrder++; // 1-4. 다음으로 방문한다.
+                DFS(newNode); // 1-5. 다음으로 방문한 노드에서 DFS
             }
         }
     }
