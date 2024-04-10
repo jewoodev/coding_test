@@ -33,14 +33,14 @@ class Main {
 
             boolean isBreak = false;
             for (int j = 0; j < length; j++) { // 1-1. press가 누를 수 없는 경우의 수인지 확인하는 로직
-                if (broken[press.charAt(j) - '0']) { // 1-2. 고장난 버튼을 눌러야 하는 번호라면 다음 경우를 확인
+                if (broken[press.charAt(j) - '0']) { // 1-2. 고장난 버튼을 눌러야 하는 번호라면 다음 경우의 버튼을 확인
                     isBreak = true;
                     break;
                 }
             }
             if (!isBreak) { // 1-3. 아니라면
-                int min = Math.abs(N - i) + length; // N까지 이동하는 횟수(N - i)만큼
-                result = Math.min(result, min);
+                int min = Math.abs(N - i) + length; // 1-4. 더 이동해야하는 채널 번호(N - i)과 버튼 누른 횟수를 더한 값 중
+                result = Math.min(result, min); // 1-5. 최소인 것을 찾아서 답을 구한다.
             }
         }
         System.out.println(result);
