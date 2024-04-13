@@ -12,11 +12,10 @@ dp += dp[i - coin[j]]
  */
 
 public class Main {
-    private static int n, k, answer;
+    private static int n, k;
     private static int[] coin; // 사용할 수 있는 동전을 저장할 배열
     private static List<Integer> dp = new ArrayList<>(); // 경우의 수를 저장할 리스트
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    private static StringBuilder sb = new StringBuilder();
 
     public static void main(String[] args) throws IOException {
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -26,8 +25,6 @@ public class Main {
 
         init(); // 동전 값 배열 p에 저장
         solve();
-
-        System.out.print(sb);
     }
 
     private static void init() throws IOException {
@@ -50,6 +47,6 @@ public class Main {
                 dp.set(j, dp.get(j) + dp.get(j - coin[i]));
             }
         }
-        sb.append(dp.get(k)).append("\n");
+        System.out.print(dp.get(k));
     }
 }
