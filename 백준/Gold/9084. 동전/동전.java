@@ -1,6 +1,16 @@
 import java.util.*;
 import java.io.*;
 
+/*
+# 점화식 #
+    1  2  3  4  5  6  7  8  9  10
+1   1  1  1  1  1  1  1  1  1  1
+2   1  2  2  3  3  4  4  5  5  6
+5   1  2  2  3  4  5  6  7  8  9
+
+dp += dp[i - coin[j]]
+ */
+
 public class Main {
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static StringBuilder sb = new StringBuilder();
