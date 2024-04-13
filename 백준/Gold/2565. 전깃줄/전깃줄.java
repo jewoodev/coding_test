@@ -1,5 +1,14 @@
 import java.io.*;
-import java.util.*;
+
+/*
+전체 전선 개수 - 설치 가능 개수 로 철거해야 하는 전선의 개수를 구한다.
+
+1. 설치 가능한 전선 갯수를 세어야 한다. i 번째 A 전봇대에 연결된 B 전봇대보다
+    이전의 A 전봇대에 연결된 B 전봇대의 값이 작을때 
+    i번째의 전선과 교차되지 않는다는 점에 초점을 맞춘다.   
+2. A전봇대 기준으로 i번째에 연결된 전깃줄을 잇고 i번째 이전의 전선들을 확인하면서
+    i번째에 연결된 B의 값보다 작은 것을 모두 세는 작업을 Bottom-Up 방식으로 진행한다.
+*/
 
 public class Main {
     private static int n, answer;
@@ -47,7 +56,7 @@ public class Main {
                 }
             }
         }
-        
+
         int max = 0;
         for (int i = 0; i < n; i++) {
             max = Math.max(max, dp[i]);
